@@ -1,0 +1,7 @@
+management:
+  security:
+    enabled: false
+  port: 8088
+endpoints:
+  hypermedia:
+    enabled: true
