@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,11 +14,15 @@ public class Publisher {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Publisher.class);
     private final RedisMessagePublisher pub;
-    List<String> users = Arrays.asList(new String[]{"jack","joe","jill"});
+    private List<String> users = new ArrayList<>();
     int i = 0;
 
     public Publisher(RedisMessagePublisher pub){
         this.pub = pub;
+        users.addAll(Arrays.asList(new String[]{"jack","joe","jill"}));
+        for (String user:users) {
+            pub.addUser(user);
+        }
     }
 
     @Scheduled(fixedRate = 5000)
@@ -30,5 +35,16 @@ public class Publisher {
 
     public List<String> getUsers() {
         return users;
+    }
+
+    public void addUser(String user){
+        users.add(user);
+        pub.addUser(user);
+    }
+
+
+    public void removeUser(String user){
+        users.remove(user);
+        pub.removeUser(user);
     }
 }

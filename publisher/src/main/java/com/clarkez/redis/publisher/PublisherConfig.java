@@ -38,9 +38,9 @@ public class PublisherConfig {
     @Bean
     RedisMessagePublisher redisPublisher(RedisConnectionFactory connectionFactory){
         RedisMessagePublisher redisPublisher = new RedisMessagePublisher(template(connectionFactory),topic());
-        redisPublisher.addUser("jack");
-        redisPublisher.addUser("jill");
-        redisPublisher.addUser("joe");
+//        redisPublisher.addUser("jack");
+//        redisPublisher.addUser("jill");
+//        redisPublisher.addUser("joe");
         return redisPublisher;
     }
 

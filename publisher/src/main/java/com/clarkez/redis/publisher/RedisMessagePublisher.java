@@ -30,7 +30,11 @@ public class RedisMessagePublisher {
         ChannelTopic userTopic = new ChannelTopic("/chat/"+user);
         userTopics.put(user,userTopic);
     }
- 
+
+    public void removeUser(String user){
+        userTopics.remove(user);
+    }
+
     public void publish(String message) {
         redisTemplate.convertAndSend(topic.getTopic(), message);
     }

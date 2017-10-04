@@ -13,7 +13,7 @@ public class PublisherActuatorEndPoint implements Endpoint<Publisher> {
 
     @Override
     public String getId() {
-        return "publsher";
+        return "publisher";
     }
 
     @Override
