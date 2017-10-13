@@ -1,4 +1,10 @@
+server:
+  port: 8081
+
 management:
   security:
     enabled: false
   port: 8089
+endpoints:
+  hypermedia:
+    enabled: true

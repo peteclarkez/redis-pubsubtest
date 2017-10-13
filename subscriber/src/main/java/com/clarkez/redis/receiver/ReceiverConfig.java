@@ -1,6 +1,8 @@
 package com.clarkez.redis.receiver;
 
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 
 import org.slf4j.Logger;
@@ -27,9 +29,8 @@ public class ReceiverConfig {
 
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
-        container.addMessageListener(listenerAdapter, new PatternTopic("/chat"));
-        container.addMessageListener(listenerAdapter, new PatternTopic("/chat/*"));
 
+        container.addMessageListener(listenerAdapter, new PatternTopic("/chat"));
         return container;
     }
 
@@ -39,15 +40,20 @@ public class ReceiverConfig {
     }
 
     @Bean
-    Receiver receiver(CountDownLatch latch) {
-        return new Receiver(latch);
+    Receiver receiver() {
+        return new Receiver();
     }
 
     @Bean
-    CountDownLatch latch() {
-        return new CountDownLatch(1);
-    }
+    RedisMessageReceiver redisMessageReceiver (RedisMessageListenerContainer container){
+        MessageListenerBuilder builder = new MessageListenerBuilder();
 
+       RedisMessageReceiver receiver = new RedisMessageReceiver(builder,container);
+        for (String user:new String[]{"jack","joe","jill"}) {
+            receiver.addUser(user);
+        }
+        return receiver;
+    }
     @Bean
     StringRedisTemplate template(RedisConnectionFactory connectionFactory) {
         return new StringRedisTemplate(connectionFactory);

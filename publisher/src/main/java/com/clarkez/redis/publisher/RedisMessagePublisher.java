@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +18,10 @@ public class RedisMessagePublisher {
     public Map<String,ChannelTopic> userTopics;
 
     public RedisMessagePublisher() {
+    }
+
+    public Collection<String> getUsers(){
+        return userTopics.keySet();
     }
  
     public RedisMessagePublisher(
