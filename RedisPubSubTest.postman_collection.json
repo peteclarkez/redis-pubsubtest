@@ -206,6 +206,28 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "Publisher Get Next Service",
+			"request": {
+				"url": "http://localhost:8080/next-instance/receiver",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Receiver Get Service ID",
+			"request": {
+				"url": "http://localhost:8080/next-instance/receiver",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
