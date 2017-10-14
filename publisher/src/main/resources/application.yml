@@ -1,7 +1,7 @@
 management:
   security:
     enabled: false
-  port: 8088
+  port: ${MGMTPORT:8088}
 endpoints:
   hypermedia:
     enabled: true

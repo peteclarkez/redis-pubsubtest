@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: publisher
+
+eureka:
+  instance:
+    metadataMap:
+      management.port:  ${MGMTPORT:8088}
