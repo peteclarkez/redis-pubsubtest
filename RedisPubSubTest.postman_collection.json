@@ -1,0 +1,211 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RedisPubSubTest",
+		"_postman_id": "e1f956d0-6943-cd4e-536e-182b173f0b14",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Publisher Actuator List",
+			"request": {
+				"url": "http://localhost:8088/actuator",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Publisher End Point",
+			"request": {
+				"url": "http://localhost:8088/publisher",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Publisher List Filter",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8088/publisher/filter?search=ja",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"publisher",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "ja",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Publisher List Add User",
+			"request": {
+				"url": "http://localhost:8088/publisher/addUser",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user",
+							"value": "john",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Publisher List Delete User",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8088/publisher/delUser?user=jack",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"publisher",
+						"delUser"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "jack",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Receiver Actuator List",
+			"request": {
+				"url": "http://localhost:8088/actuator",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Receiver End Point",
+			"request": {
+				"url": "http://localhost:8089/receiver",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Receiver List Add User",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8089/receiver/addUser?user=john",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"receiver",
+						"addUser"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "john",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Receiver Delete User",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8089/receiver/delUser?user=john",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"receiver",
+						"delUser"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "john",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Publisher GetServiceLists",
+			"request": {
+				"url": "http://localhost:8080/service-instances/receiver",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
