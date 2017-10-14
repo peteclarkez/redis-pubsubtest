@@ -31,4 +31,9 @@ public class EurekaClientServiceInfo {
             @PathVariable String applicationName) {
         return this.eurekaClient.getNextServerFromEureka(applicationName,false );
     }
+
+    @RequestMapping("/appid")
+    public String getAppId() {
+        return this.eurekaClient.getApplicationInfoManager().getEurekaInstanceConfig().getInstanceId();
+    }
 }
