@@ -17,6 +17,7 @@ As part of this project I've created Actuator End points to be able to control t
 
 As well as Actuator EndPoints there are also MVC Endpoints to control the list of names/topics that are used for communications.
 
+I've also used Lombok for the domain objects.
 
 
 ### TODO
