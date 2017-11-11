@@ -4,10 +4,11 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.MessageListener;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.data.redis.support.collections.DefaultRedisList;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -31,11 +32,15 @@ public class RedisMessageReceiver {
     private final RedisMessageListenerContainer redisMessageListenerContainer;
 
     public Map<String,ReceiverRecord> userTopics;
+    public List<String> users;
 
-    public  RedisMessageReceiver( MessageListenerBuilder listenerBuilder, RedisMessageListenerContainer redisMessageListenerContainer){
+
+    public  RedisMessageReceiver( MessageListenerBuilder listenerBuilder, RedisMessageListenerContainer redisMessageListenerContainer,
+                                  RedisTemplate template, String appID){
         this.redisMessageListenerContainer = redisMessageListenerContainer;
         this.listenerBuilder = listenerBuilder;
         this.userTopics = new HashMap<>();
+        users = new DefaultRedisList<String>(template.boundListOps("clarkez:receiver:"+appID+":users"));
     }
 
 
@@ -54,9 +59,11 @@ public class RedisMessageReceiver {
 
         ReceiverRecord rec = new ReceiverRecord(user,userTopic,listener);
         userTopics.put(user,rec);
+        users.add(user);
     }
 
     public void removeUser(String user){
+        users.remove(user);
         ReceiverRecord rec = userTopics.remove(user);
         if(null == rec){
             return;

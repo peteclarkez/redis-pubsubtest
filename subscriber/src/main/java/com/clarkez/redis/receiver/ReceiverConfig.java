@@ -1,19 +1,18 @@
 package com.clarkez.redis.receiver;
 
 import com.google.common.collect.ImmutableList;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.Topic;
-import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 
 @Configuration
 public class ReceiverConfig {
@@ -48,13 +47,11 @@ public class ReceiverConfig {
     }
 
     @Bean
-    RedisMessageReceiver redisMessageReceiver (RedisMessageListenerContainer container){
+    RedisMessageReceiver redisMessageReceiver (RedisMessageListenerContainer container,RedisTemplate template){
         MessageListenerBuilder builder = new MessageListenerBuilder();
 
-       RedisMessageReceiver receiver = new RedisMessageReceiver(builder,container);
-        for (String user:new String[]{"jack","joe","jill"}) {
-            receiver.addUser(user);
-        }
+       RedisMessageReceiver receiver = new RedisMessageReceiver(builder,container,template,applicationIDController.getAppId());
+
         return receiver;
     }
 

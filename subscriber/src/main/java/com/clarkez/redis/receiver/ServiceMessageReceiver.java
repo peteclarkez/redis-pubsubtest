@@ -1,24 +1,20 @@
 package com.clarkez.redis.receiver;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.netflix.discovery.converters.Auto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Map;
+
 public class ServiceMessageReceiver implements MessageListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceMessageReceiver.class);
 
-    private List<String> users = new ArrayList<>();
     @Autowired
     private RedisMessageReceiver redisMessageReceiver;
 
@@ -30,7 +26,6 @@ public class ServiceMessageReceiver implements MessageListener {
     public ServiceMessageReceiver(RedisMessageReceiver redisMessageReceiver) {
         this.redisMessageReceiver = redisMessageReceiver;
     }
-
 
     public void receiveMessage(String message) {
         LOGGER.info("Received <" + message + ">");
