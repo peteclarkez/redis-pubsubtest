@@ -14,6 +14,7 @@ public class Publisher {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Publisher.class);
     private final RedisMessagePublisher pub;
+
     private List<String> users = new ArrayList<>();
     int i = 0;
 

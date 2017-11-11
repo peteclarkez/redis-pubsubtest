@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.support.collections.DefaultRedisMap;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -18,34 +18,33 @@ public class RedisMessagePublisher {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RedisMessagePublisher.class);
 
-    @Autowired
+
     private RedisTemplate<String, String> redisTemplate;
-    @Autowired
     private ChannelTopic topic;
+
     @Autowired
     EurekaClientServiceInfo eurekaClientServiceInfo;
-
     private final ObjectMapper objectMapper = new ObjectMapper();
-
     public Map<String,ChannelTopic> userTopics;
+    public Map<String,String> userTopicStrings;
 
-    public RedisMessagePublisher() {
-    }
 
     public Collection<String> getUsers(){
         return userTopics.keySet();
     }
  
     public RedisMessagePublisher(
-      RedisTemplate<String, String> redisTemplate, ChannelTopic topic) {
-      this.redisTemplate = redisTemplate;
+            RedisTemplate<String, String> stringTopicRedisTemplate, ChannelTopic topic){
+      this.redisTemplate = stringTopicRedisTemplate;
       this.topic = topic;
-      this.userTopics = new HashMap<>();
+      this.userTopics = new LinkedHashMap<>();
+      this.userTopicStrings = new DefaultRedisMap<String, String>(stringTopicRedisTemplate.boundHashOps("clarke:publisher:users"));
     }
 
     public void addUser(String user){
         ChannelTopic userTopic = new ChannelTopic("/chat/"+user);
         userTopics.put(user,userTopic);
+        userTopicStrings.put(user,userTopic.getTopic());
         try {
             login(user, userTopic);
         }catch (Throwable e){
@@ -70,6 +69,8 @@ public class RedisMessagePublisher {
 
     public void removeUser(String user){
         userTopics.remove(user);
+        userTopicStrings.remove(user);
+
     }
 
     public void publish(String message) {
