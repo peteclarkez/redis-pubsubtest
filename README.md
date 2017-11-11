@@ -23,5 +23,5 @@ I've also used Lombok for the domain objects.
 ### TODO
 
 - Find how to run all this with spring boot's maven plugin
-- Add a Login message that automatically causes a subscription in the Seclected Receiver
+- Add option to use consul instead of Eureka & listen to the consul cloud bus for app availability events
 - Start Testing Failover in the case that a Receiver is removed
