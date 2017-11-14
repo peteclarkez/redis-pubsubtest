@@ -25,3 +25,4 @@ I've also used Lombok for the domain objects.
 - Find how to run all this with spring boot's maven plugin
 - Add option to use consul instead of Eureka & listen to the consul cloud bus for app availability events
 - Start Testing Failover in the case that a Receiver is removed
+- Add Heartbeat & Expiry to Redis
