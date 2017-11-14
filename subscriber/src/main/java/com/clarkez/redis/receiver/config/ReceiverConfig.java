@@ -1,5 +1,9 @@
-package com.clarkez.redis.receiver;
+package com.clarkez.redis.receiver.config;
 
+import com.clarkez.redis.receiver.ApplicationIDController;
+import com.clarkez.redis.receiver.pubsub.MessageListenerBuilder;
+import com.clarkez.redis.receiver.pubsub.RedisMessageReceiver;
+import com.clarkez.redis.receiver.pubsub.LoginMessageReceiver;
 import com.google.common.collect.ImmutableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +21,7 @@ import org.springframework.data.redis.listener.Topic;
 @Configuration
 public class ReceiverConfig {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceMessageReceiver.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginMessageReceiver.class);
 
     @Autowired
     ApplicationIDController applicationIDController;
@@ -33,9 +37,9 @@ public class ReceiverConfig {
 
 
     @Bean
-    ServiceMessageReceiver receiver(RedisMessageReceiver redisMessageReceiver,RedisMessageListenerContainer container ) {
+    LoginMessageReceiver receiver(RedisMessageReceiver redisMessageReceiver, RedisMessageListenerContainer container ) {
 
-        ServiceMessageReceiver receiver = new ServiceMessageReceiver(redisMessageReceiver);
+        LoginMessageReceiver receiver = new LoginMessageReceiver(redisMessageReceiver);
 
         String appID = applicationIDController.getAppId();
         Topic t = new ChannelTopic("/chat/login/"+appID);

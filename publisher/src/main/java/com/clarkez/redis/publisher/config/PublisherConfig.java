@@ -1,5 +1,6 @@
-package com.clarkez.redis.publisher;
+package com.clarkez.redis.publisher.config;
 
+import com.clarkez.redis.publisher.pubsub.RedisMessagePublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;

@@ -1,7 +1,6 @@
-package com.clarkez.redis.publisher;
+package com.clarkez.redis.receiver.actuator;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.endpoint.Endpoint;
 import org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,19 +9,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Component
-public class PublisherActuatorMvcEndPoint extends EndpointMvcAdapter {
+public class ReceiverActuatorMvcEndPoint extends EndpointMvcAdapter {
 
 
-    private final PublisherActuatorEndPoint delegate;
+    private final ReceiverActuatorEndPoint delegate;
 
     @Autowired
-    public PublisherActuatorMvcEndPoint(PublisherActuatorEndPoint delegate) {
+    public ReceiverActuatorMvcEndPoint(ReceiverActuatorEndPoint delegate) {
         super(delegate);
         this.delegate = delegate;
     }
@@ -30,11 +27,12 @@ public class PublisherActuatorMvcEndPoint extends EndpointMvcAdapter {
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
     @ResponseBody
     public Collection<String> filter(@RequestParam(required = false) String search) {
-        String newSearch = search==null?"ja":search;
+        String newSearch = search == null ? "ja" : search;
         Predicate<String> contains = val -> val.contains(newSearch);
 
         return delegate.invoke().getUsers().stream().filter(contains).collect(Collectors.toList());
     }
+
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     @ResponseBody
@@ -49,4 +47,6 @@ public class PublisherActuatorMvcEndPoint extends EndpointMvcAdapter {
         delegate.invoke().removeUser(user);
         return delegate.invoke().getUsers();
     }
+
 }
+

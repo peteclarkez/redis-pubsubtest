@@ -1,6 +1,5 @@
-package com.clarkez.redis.receiver;
+package com.clarkez.redis.publisher.actuator;
 
-import com.clarkez.redis.receiver.ReceiverActuatorEndPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter;
 import org.springframework.stereotype.Component;
@@ -14,13 +13,13 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Component
-public class ReceiverActuatorMvcEndPoint extends EndpointMvcAdapter {
+public class PublisherActuatorMvcEndPoint extends EndpointMvcAdapter {
 
 
-    private final ReceiverActuatorEndPoint delegate;
+    private final PublisherActuatorEndPoint delegate;
 
     @Autowired
-    public ReceiverActuatorMvcEndPoint(ReceiverActuatorEndPoint delegate) {
+    public PublisherActuatorMvcEndPoint(PublisherActuatorEndPoint delegate) {
         super(delegate);
         this.delegate = delegate;
     }
@@ -28,12 +27,11 @@ public class ReceiverActuatorMvcEndPoint extends EndpointMvcAdapter {
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
     @ResponseBody
     public Collection<String> filter(@RequestParam(required = false) String search) {
-        String newSearch = search == null ? "ja" : search;
+        String newSearch = search==null?"ja":search;
         Predicate<String> contains = val -> val.contains(newSearch);
 
         return delegate.invoke().getUsers().stream().filter(contains).collect(Collectors.toList());
     }
-
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     @ResponseBody
@@ -48,6 +46,4 @@ public class ReceiverActuatorMvcEndPoint extends EndpointMvcAdapter {
         delegate.invoke().removeUser(user);
         return delegate.invoke().getUsers();
     }
-
 }
-

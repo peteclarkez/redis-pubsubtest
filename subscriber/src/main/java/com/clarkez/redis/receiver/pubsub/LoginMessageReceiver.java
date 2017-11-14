@@ -1,4 +1,4 @@
-package com.clarkez.redis.receiver;
+package com.clarkez.redis.receiver.pubsub;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,18 +12,18 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Map;
 
-public class ServiceMessageReceiver implements MessageListener {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceMessageReceiver.class);
+public class LoginMessageReceiver implements MessageListener {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginMessageReceiver.class);
 
     @Autowired
     private RedisMessageReceiver redisMessageReceiver;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public ServiceMessageReceiver() {
+    public LoginMessageReceiver() {
     }
 
-    public ServiceMessageReceiver(RedisMessageReceiver redisMessageReceiver) {
+    public LoginMessageReceiver(RedisMessageReceiver redisMessageReceiver) {
         this.redisMessageReceiver = redisMessageReceiver;
     }
 

@@ -1,5 +1,6 @@
-package com.clarkez.redis.publisher;
+package com.clarkez.redis.publisher.pubsub;
 
+import com.clarkez.redis.publisher.EurekaClientServiceInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.appinfo.InstanceInfo;

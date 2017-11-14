@@ -1,12 +1,9 @@
-package com.clarkez.redis.receiver;
+package com.clarkez.redis.receiver.actuator;
 
+import com.clarkez.redis.receiver.pubsub.RedisMessageReceiver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.endpoint.Endpoint;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class ReceiverActuatorEndPoint implements Endpoint<RedisMessageReceiver> {

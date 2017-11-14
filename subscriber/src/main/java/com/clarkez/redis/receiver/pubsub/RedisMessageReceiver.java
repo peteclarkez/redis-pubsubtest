@@ -1,4 +1,4 @@
-package com.clarkez.redis.receiver;
+package com.clarkez.redis.receiver.pubsub;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class RedisMessageReceiver {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceMessageReceiver.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginMessageReceiver.class);
 
     @Data
     @RequiredArgsConstructor

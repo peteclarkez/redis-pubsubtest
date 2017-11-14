@@ -1,4 +1,4 @@
-package com.clarkez.redis.receiver;
+package com.clarkez.redis.receiver.pubsub;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import org.slf4j.Logger;
@@ -8,9 +8,6 @@ import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 public class MessageListenerBuilder {
 

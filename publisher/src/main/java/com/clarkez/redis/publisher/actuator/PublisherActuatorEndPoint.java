@@ -1,15 +1,16 @@
-package com.clarkez.redis.publisher;
+package com.clarkez.redis.publisher.actuator;
 
 
+import com.clarkez.redis.publisher.ScheduledMessagePublisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.endpoint.Endpoint;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PublisherActuatorEndPoint implements Endpoint<Publisher> {
+public class PublisherActuatorEndPoint implements Endpoint<ScheduledMessagePublisher> {
 
     @Autowired
-    Publisher publisher;
+    ScheduledMessagePublisher scheduledMessagePublisher;
 
     @Override
     public String getId() {
@@ -27,7 +28,7 @@ public class PublisherActuatorEndPoint implements Endpoint<Publisher> {
     }
 
     @Override
-    public Publisher invoke() {
-        return publisher;
+    public ScheduledMessagePublisher invoke() {
+        return scheduledMessagePublisher;
     }
 }

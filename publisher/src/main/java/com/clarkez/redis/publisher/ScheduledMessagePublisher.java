@@ -1,5 +1,6 @@
 package com.clarkez.redis.publisher;
 
+import com.clarkez.redis.publisher.pubsub.RedisMessagePublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -10,15 +11,15 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class Publisher {
+public class ScheduledMessagePublisher {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Publisher.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ScheduledMessagePublisher.class);
     private final RedisMessagePublisher pub;
 
     private List<String> users = new ArrayList<>();
     int i = 0;
 
-    public Publisher(RedisMessagePublisher pub){
+    public ScheduledMessagePublisher(RedisMessagePublisher pub){
         this.pub = pub;
         users.addAll(Arrays.asList(new String[]{"jack","joe","jill"}));
         for (String user:users) {
